@@ -9,4 +9,3 @@
 [submodule "pulp-ansible"]
 	path = pulp-ansible
 	url = git@github.com:pulp/pulp_ansible.git
-	branch = master
