@@ -4,6 +4,7 @@ volumes:
   postgres_data: {}
   redis_data: {}
   pulp_data: {}
+  prometheus_data: {}
 
 services:
 
@@ -90,3 +91,13 @@ services:
     image: redis:5
     volumes:
       - redis_data:/data
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./docker/prometheus/:/etc/prometheus
+      - prometheus_data:/prometheus
+    depends_on:
+      - galaxy-api
