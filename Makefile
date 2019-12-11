@@ -13,8 +13,18 @@ Docker commands:
   docker/destroy                - Stop and remove containers and data volumes.
   docker/run-migrations         - Run migrations in docker environment.
 
+Export 'USE_PROM=1' env var to optionally bring up a Prometheus container.
+
 endef
 export HELP_MESSAGE
+
+USE_PROM ?=
+COMPOSE_FILE ?= docker-compose.yaml
+PROM_COMPOSE_FILE ?= docker-compose-prometheus.yaml
+COMPOSE_FLAGS += -f $(COMPOSE_FILE)
+ifdef USE_PROM
+	COMPOSE_FLAGS += -f $(PROM_COMPOSE_FILE)
+endif
 
 .PHONY: help
 help:
@@ -24,29 +34,30 @@ help:
 
 .PHONY: docker/build
 docker/build:
-	docker-compose build
+	docker-compose $(COMPOSE_FLAGS) build
 
 .PHONY: docker/rebuild
 docker/rebuild:
-	docker-compose build --no-cache
+	docker-compose $(COMPOSE_FLAGS) build --no-cache
 
 .PHONY: docker/up
 docker/up:
-	docker-compose up --build -d
+	docker-compose $(COMPOSE_FLAGS) up --build -d
+	# docker-compose up --build -d
 
 .PHONY: docker/logs
 docker/logs:
-	docker-compose logs -f
+	docker-compose $(COMPOSE_FLAGS) logs -f
 
 .PHONY: docker/down
 docker/down:
-	docker-compose down
+	docker-compose $(COMPOSE_FLAGS) down
 
 .PHONY: docker/destroy
 docker/destroy:
-	docker-compose down --volumes
+	docker-compose $(COMPOSE_FLAGS) down --volumes
 
 .PHONY: docker/run-migrations
 docker/run-migrations:
-	docker-compose run --rm pulp-api manage migrate
-	docker-compose run --rm galaxy-api manage migrate
+	docker-compose $(COMPOSE_FLAGS) run --rm pulp-api manage migrate
+	docker-compose $(COMPOSE_FLAGS) run --rm galaxy-api manage migrate
