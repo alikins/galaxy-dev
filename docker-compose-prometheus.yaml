@@ -1,0 +1,15 @@
+version: '3.4'
+
+volumes:
+  prometheus_data: {}
+
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./docker/prometheus/:/etc/prometheus
+      - prometheus_data:/prometheus
+    depends_on:
+      - galaxy-api
