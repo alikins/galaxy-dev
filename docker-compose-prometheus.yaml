@@ -6,6 +6,8 @@ volumes:
 services:
   prometheus:
     image: prom/prometheus
+    env_file:
+      - ./docker/prometheus/env
     ports:
       - '9090:9090'
     volumes:
