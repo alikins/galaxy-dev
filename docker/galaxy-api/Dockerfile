@@ -33,7 +33,7 @@ COPY galaxy-api/Pipfile \
 RUN python3.6 -m venv "${GALAXY_VENV}" \
     && source "${GALAXY_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
-        'pip<19.0' \
+        'pip' \
         wheel \
         pipenv \
     && cd /tmp/galaxy-api \

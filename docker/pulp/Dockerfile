@@ -25,7 +25,7 @@ COPY docker/pulp/requirements_ansible_test.txt /tmp/ansible_test/
 RUN python3.6 -m venv "${ANSIBLE_TEST_VENV}" \
     && source "${ANSIBLE_TEST_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
-        'pip<19.0' \
+        'pip' \
         wheel \
     && cd /tmp/ansible_test \
     && pip install --default-timeout 100 -r requirements_ansible_test.txt \
@@ -34,7 +34,7 @@ RUN python3.6 -m venv "${ANSIBLE_TEST_VENV}" \
 RUN python3.6 -m venv "${PULP_VENV}" \
     && source "${PULP_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
-        'pip<19.0' \
+        'pip' \
         wheel \
     && cd /tmp/pulp \
     && pip install --default-timeout 100 -r requirements.txt
