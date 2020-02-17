@@ -11,12 +11,13 @@ services:
       context: '.'
       dockerfile: docker/insights-proxy/Dockerfile
     volumes:
-      # - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/config/local-frontend-and-api.jsi
       - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/config/spandx.config.js
     environment:
       SPANDX_CONFIG: /config/spandx.config.js
+      PLATFORM: linux
     security_opt:
       - label=disable
+    network_mode: "host"
     ports:
       - '1337:1337'
     depends_on:

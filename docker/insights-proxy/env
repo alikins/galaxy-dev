@@ -1,1 +1,2 @@
 SPANDX_CONFIG="/config/spandx.config.js"
+PLATFORM="linux"
