@@ -3,9 +3,8 @@ FROM fedora:31
 
 ENV PYTHONUNBUFFERED=1
 
-RUN dnf update -y && \
-        dnf install -y nodejs git git-core && \
-        dnf clean all
+RUN dnf install -y nodejs git git-core \
+    && dnf clean all
 
 COPY ansible-hub-ui/ /code/ansible-hub-ui/
 
