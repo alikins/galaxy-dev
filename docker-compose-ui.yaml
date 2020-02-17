@@ -11,7 +11,10 @@ services:
     #      context: '.'
     #      dockerfile: docker/insights-proxy/Dockerfile
     volumes:
-      - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/local-frontend-and-api.js
+      # - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/config/local-frontend-and-api.jsi
+      - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/spandx.config.js
+    security_opt:
+      - label=disable
     ports:
       - '1337:1337'
     depends_on:
