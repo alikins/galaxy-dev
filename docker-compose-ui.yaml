@@ -21,8 +21,8 @@ services:
     depends_on:
       - galaxy-api
 
-  automationhubui:
-    image: docker.io/redhatinsights/insights-proxy
+  ansiblehubui:
+    image: galaxy-dev/insights-proxy
     # build/run an image with npm (reused insightsproxy image?)
     # forward localhost:8002 to container:8002
     #

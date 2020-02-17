@@ -1,15 +1,8 @@
-FROM fedora:29
 
-RUN dnf update -y && \
-        dnf install -y nodejs && \
-        dnf clean all
+FROM docker.io/redhatinsights/insights-proxy
 
-COPY ./package.json /package.json
-RUN npm install
-
-COPY ./certs /certs
-COPY ./ssl /ssl
-
-COPY ./spandx.config.js /spandx.config.js
-
-CMD [ "/usr/bin/node", "/node_modules/spandx/app/cli.js" ]
+# ENV PATH="/venv/bin:$PATH"
+ENV SPANDX_CONFIG="/etc/local-frontend-and-api.js"
+# COPY docker/galaxy-api/entrypoint.sh /entrypoint
+# ENTRYPOINT [ "/entrypoint" ]
+CMD npm run start
