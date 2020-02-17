@@ -7,12 +7,14 @@ services:
     # insights proxy needs access tp automationhubui:8002 (and/or localhost:8002)
     # image: docker.io/redhatinsights/insights-proxy
     image: galaxy-dev/insights-proxy
-    #    build:
-    #      context: '.'
-    #      dockerfile: docker/insights-proxy/Dockerfile
+    build:
+      context: '.'
+      dockerfile: docker/insights-proxy/Dockerfile
     volumes:
       # - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/config/local-frontend-and-api.jsi
-      - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/spandx.config.js
+      - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/config/spandx.config.js
+    environment:
+      SPANDX_CONFIG: /config/spandx.config.js
     security_opt:
       - label=disable
     ports:
