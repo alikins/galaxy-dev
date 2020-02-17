@@ -5,4 +5,4 @@ FROM docker.io/redhatinsights/insights-proxy
 
 # COPY docker/galaxy-api/entrypoint.sh /entrypoint
 # ENTRYPOINT [ "/entrypoint" ]
-CMD [ npm, run start ]
+RUN npm run start
