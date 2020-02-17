@@ -1,0 +1,34 @@
+version: '3.4'
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+services:
+  insightsproxy:
+    # run insightsproxy
+    # forwarding local:1337 to its 1337
+    # insights proxy needs access tp automationhubui:8002 (and/or localhost:8002)
+    # image: docker.io/redhatinsights/insights-proxy
+    image: galaxy-dev/insights-proxy
+    build:
+      context: '.'
+      dockerfile: docker/insights-proxy/Dockerfile
+    ports:
+      - '1337:1337'
+        # volumes:
+      # - ./docker/insightsproxy/local-frontend-and-api.js:/etc/local-frontend-and-api.js
+    depends_on:
+      - galaxy-api
+
+  automationhubui:
+    image: docker.io/redhatinsights/insights-proxy
+    # build/run an image with npm (reused insightsproxy image?)
+    # forward localhost:8002 to container:8002
+    #
+    ports:
+      - '8002:8002'
+    volumes:
+      - ./docker/ansiblehubui/local-frontend-and-api.js:/etc/local-frontend-and-api.js
+    depends_on:
+      - insightsproxy

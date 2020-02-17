@@ -19,11 +19,16 @@ endef
 export HELP_MESSAGE
 
 USE_PROM ?=
+USE_UI ?=
 COMPOSE_FILE ?= docker-compose.yaml
 PROM_COMPOSE_FILE ?= docker-compose-prometheus.yaml
+UI_COMPOSE_FILE ?= docker-compose-ui.yaml
 COMPOSE_FLAGS += -f $(COMPOSE_FILE)
 ifdef USE_PROM
 	COMPOSE_FLAGS += -f $(PROM_COMPOSE_FILE)
+endif
+ifdef USE_UI
+	COMPOSE_FLAGS += -f $(UI_COMPOSE_FILE)
 endif
 
 .PHONY: help
