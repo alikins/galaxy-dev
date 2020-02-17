@@ -10,6 +10,8 @@ services:
     #    build:
     #      context: '.'
     #      dockerfile: docker/insights-proxy/Dockerfile
+    volumes:
+      - ./ansible-hub-ui/profiles/local-frontend-and-api.js:/local-frontend-and-api.js
     ports:
       - '1337:1337'
     depends_on:
