@@ -1,1 +1,3 @@
-SPANDX_CONFIG="/local-frontend-and-api.js"
+CUSTOM_CONF=true
+# SPANDX_CONFIG="/local-frontend-and-api.js"
+SPANDX_CONFIG="/config/spandx.config.js"
