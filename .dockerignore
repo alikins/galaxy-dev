@@ -1,2 +1,16 @@
 .venv/
 venv/
+**/.git
+**/.DS_Store
+**/node_modules
+**/.tox
+**/dist
+**/build
+**/.ropeproject
+**/.coverage
+.gitmodules
+**/*.egg-info
+**/*.egg
+**/__pycache__
+**/docs/_build
+galaxy-api/bindings/galaxy-pulp
