@@ -1,9 +1,5 @@
 version: '3.4'
 
-volumes:
-  prometheus_data: {}
-  grafana_data: {}
-
 services:
   insightsproxy:
     # run insightsproxy
@@ -16,19 +12,22 @@ services:
     #      dockerfile: docker/insights-proxy/Dockerfile
     ports:
       - '1337:1337'
-        # volumes:
-      # - ./docker/insightsproxy/local-frontend-and-api.js:/etc/local-frontend-and-api.js
     depends_on:
       - galaxy-api
 
   ansiblehubui:
-    image: galaxy-dev/insights-proxy
     # build/run an image with npm (reused insightsproxy image?)
     # forward localhost:8002 to container:8002
     #
+    image: galaxy-dev/ansiblehubui
+    build:
+      context: '.'
+      dockerfile: docker/ansiblehubui/Dockerfile
+    env_file:
+      - ./docker/ansiblehubui/env
     ports:
       - '8002:8002'
     volumes:
-      - ./docker/ansiblehubui/local-frontend-and-api.js:/etc/local-frontend-and-api.js
+      - ./ansible-hub-ui:/code/ansible-hub-ui
     depends_on:
       - insightsproxy
