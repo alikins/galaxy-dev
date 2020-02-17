@@ -1,8 +1,16 @@
 
-FROM docker.io/redhatinsights/insights-proxy
+FROM fedora:29
 
-# ENV PATH="/venv/bin:$PATH"
-ENV SPANDX_CONFIG="/etc/local-frontend-and-api.js"
-# COPY docker/galaxy-api/entrypoint.sh /entrypoint
-# ENTRYPOINT [ "/entrypoint" ]
+ENV PYTHONUNBUFFERED=1 \
+    LANG=en_US.UTF-8
+
+RUN dnf update -y && \
+        dnf install -y nodejs git git-core && \
+        dnf clean all
+
+COPY ansible-hub-ui/ /code/ansible-hub-ui/
+
+WORKDIR /code/ansible-hub-ui/
+RUN npm install
+
 CMD npm run start
