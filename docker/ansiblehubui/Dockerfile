@@ -1,8 +1,7 @@
 
-FROM fedora:29
+FROM fedora:31
 
-ENV PYTHONUNBUFFERED=1 \
-    LANG=en_US.UTF-8
+ENV PYTHONUNBUFFERED=1
 
 RUN dnf update -y && \
         dnf install -y nodejs git git-core && \
